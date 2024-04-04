@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Jucator {
+            constructor(nume, numar, pozitie, varsta) {
+                this.nume = nume
+                this.numar = numar
+                this.pozitie = pozitie
+                this.varsta = varsta
+            }
+            alergare(){
+                console.log(`${this.nume} alearga foarte mult`)
+            }
+            inscrieGol(){
+                if(this.pozitie=='atacant'){
+                    console.log(this.nume+' marcheaza gol des')
+                }
+                else if(this.pozitie=='portar'){
+                    console.log(this.nume+' nu marcheaza')
+                }
+                else{
+                    console.log(this.nume +' marcheaza rar')
+                }
+            }
+        }
+        const Jucator1=new Jucator('Ronaldo',7,'atacant',38)
+        const portar= new Jucator('Buffon',77,'portar',40)
+        console.log(typeof Jucator1)
+        console.log(portar instanceof Jucator)
+
+        Jucator1.alergare()
+        Jucator1.inscrieGol()
+        portar.inscrieGol()
+        Jucator1.nume='Messi'
+        Jucator1.numar=10
+        
+        console.log(Jucator1)
+
+
+    </script>
+</body>
+
+</html>
