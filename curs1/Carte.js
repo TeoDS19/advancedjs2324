@@ -1,20 +1,19 @@
-class Carte {
-    constructor(titlu,autor, editura,an,pret) {
+export default class Carte {
+    constructor(titlu, autor, editura, an, pret) {
         this.titlu = titlu;
         this.autor = autor;
         this.editura = editura;
         this.an = an;
-        this.pret =pret;
+        this.pret = pret;
     }
-    deschidCartea(){
+    deschidCartea() {
         console.log('Am deschis cartea la pagina 15');
     }
     randomIntFromInterval(min, max) { // min and max included 
-       return Math.floor(Math.random() * (max - min + 1) + min)
-     }
-     
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
 
 }
 
-// Curs 2 Module
-// export { Carte }
+// export { Carte };

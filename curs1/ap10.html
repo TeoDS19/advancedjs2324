@@ -12,7 +12,7 @@
     <h2>JavaScript setter si getter cu get si set</h2>
     <script>
         class Person {
-            
+            _name;
             constructor(name) {
                 // proprietate protected _name si suport pentru name
                 this._name = name;
@@ -31,12 +31,21 @@
             }
         }
         let person = new Person("Mihai");
+        console.log(person)
         // set 
-        person.name='Ion';
-        person.name='Dan';
+        person.name = 'Ion';
+        person.fname='';
+        console.log(person) 
+        //person.name = 'Dan';
+
+
         // get
+        
         let mynume = person.name;
         console.log('Numele este', mynume);
+
+        console.log('Obiectul este este', person);
+
     </script>
 </body>
 
