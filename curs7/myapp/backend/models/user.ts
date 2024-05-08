@@ -66,7 +66,7 @@ export const create = (user: User, callback: Function) => {
       
     }
   );
-};
+}; 
 
 // update user
 export const update = (user: User, callback: Function) => {
