@@ -6,8 +6,10 @@ export interface BasicUser {
     prenume: string,
     datanastere:Date, //string
     email:string,
+    parola:string,
     telefon: string,
     dataadaugare?:Date,
+    
     actiune?:string
   }
   export interface UserWithDetails extends BasicUser, User{

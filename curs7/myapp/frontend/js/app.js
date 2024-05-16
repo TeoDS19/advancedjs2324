@@ -52,6 +52,7 @@ $(document).ready(function ($) {
                 { "data": "nume" },
                 { "data": "prenume" },
                 { "data": "email" },
+                {'data':'parola'},
                 { "data": "telefon" },
                 {
                     "data": "datanastere",
@@ -99,6 +100,8 @@ $(document).ready(function ($) {
                 $('#lname').val(res.data.nume);
                 $('#fname').val(res.data.prenume);
                 $('#email').val(res.data.email);
+                $('#parola').val(res.data.parola);
+
                 $('#age').val(datan);
                 $('#phone').val(res.data.telefon);
 
