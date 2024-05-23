@@ -1,3 +1,51 @@
+ // Adauga Editeaza utilizator 
+ function formPost(){
+    // ajax
+    var idValue = document.getElementById("id").value;
+    alert(idValue == '');
+    console.log('am id', idValue);
+    let method = 'POST';
+    let urlReq = "http://localhost:3003/users/"
+    if (idValue != '') {
+        method = 'PUT';
+        urlReq = "http://localhost:3003/users/" + idValue;
+    }
+    
+    // alert(method);
+    // alert(urlReq);
+
+    var form = $("#userInserUpdateForm")
+
+    if (form[0].checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    var formData = new FormData(form[0]);
+
+    $.ajax({
+
+        type: method,
+        url: urlReq,
+        data: formData, //$(this).serialize(), // get all form field value in 
+        contentType: false, //this is requireded 
+        cache: false,
+        processData: false, //this is requireded 
+        dataType: 'json',
+        success: function (res) {
+            console.log('am primit', res);
+            // $('#user-model').modal('hide');
+            // window.location.reload();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log('am primit', XMLHttpRequest);
+            console.log("Error: " + errorThrown + textStatus);
+        },
+        complete: function () {
+           // $('#user-model').modal('hide');
+           // window.location.reload();
+        }
+    });
+}
 // validare
 // 
 (function () {
@@ -12,6 +60,10 @@
                     event.preventDefault()
                     event.stopPropagation()
                 }
+                else{
+                    event.preventDefault();  // event.default or form submit 
+                    formPost(); 
+                }
                 form.classList.add('was-validated')
             }, false)
         })
@@ -20,7 +72,6 @@
 
 //https://datatables.net/examples/server_side/object_data.html
 $(document).ready(function ($) {
-    // Adauga utilizator nou
     $('#addNewUser').click(function () {
         $('#userInserUpdateForm').trigger("reset");
         $('#userModel').html("Adauga un user nou");
@@ -40,7 +91,7 @@ $(document).ready(function ($) {
         contentType: 'application/json'
 
     }).done(function (data) {
-        //console.log(data);
+        console.log(data);
         $('#example').dataTable({
             "paging": true,
             "pageLength": 2,
@@ -52,8 +103,13 @@ $(document).ready(function ($) {
                 { "data": "nume" },
                 { "data": "prenume" },
                 { "data": "email" },
-                {'data':'parola'},
                 { "data": "telefon" },
+                { 
+                    "data": "poza",
+                    render:function (data) {
+                        return '<img src="../backend/dist/uploads/' +data+ '" />';
+                    }
+                },
                 {
                     "data": "datanastere",
                     render: $.fn.dataTable.render.moment('YYYY-MM-DDTHH:mm:ss.SSSSZ','YYYY-MM-DD' )
@@ -76,7 +132,7 @@ $(document).ready(function ($) {
             ]
         })
     })
-    // END Adauga utilizator nou
+    
     //   Editeaza utilizator
     $('body').on('click', '.edit', function () {
         var id = $(this).data('id');
@@ -100,8 +156,7 @@ $(document).ready(function ($) {
                 $('#lname').val(res.data.nume);
                 $('#fname').val(res.data.prenume);
                 $('#email').val(res.data.email);
-                $('#parola').val(res.data.parola);
-
+                
                 $('#age').val(datan);
                 $('#phone').val(res.data.telefon);
 
@@ -130,47 +185,54 @@ $(document).ready(function ($) {
             });
         }
     });
-    $('#userInserUpdateForm').submit(function () {
-        // ajax
-        var idValue = document.getElementById("id").value;
-        var nume = document.getElementById("lname").value;
-        var prenume = document.getElementById("fname").value;
-        alert(idValue == '');
-        console.log('am id', idValue);
-        let method = 'POST';
-        let urlReq = "http://localhost:3003/users/"
-        if (idValue != '') {
-            method = 'PUT';
-            urlReq = "http://localhost:3003/users/" + idValue;
-        }
-        else {
-            idValue
-        }
-        alert(method);
-        alert(urlReq);
-        $.ajax({
+    // $('#userInserUpdateForm').submit(function () {
+    //     // ajax
+    //     var idValue = document.getElementById("id").value;
+    //     var nume = document.getElementById("lname").value;
+    //     var prenume = document.getElementById("fname").value;
+    //     alert(idValue == '');
+    //     console.log('am id', idValue);
+    //     let method = 'POST';
+    //     let urlReq = "http://localhost:3003/users/"
+    //     if (idValue != '') {
+    //         method = 'PUT';
+    //         urlReq = "http://localhost:3003/users/" + idValue;
+    //     }
+    //     else {
+    //         idValue
+    //     }
+    //     alert(method);
+    //     alert(urlReq);
 
-            type: method,
-            url: urlReq,
-            data: $(this).serialize(), // get all form field value in 
-            // data:{
-            //     nume:nume,
-            //     prenume:prenume,
-            //     id:idValue
-            // },
-            dataType: 'json',
-            success: function (res) {
-                console.log('am primit', res);
+    //     var form = $("#userInserUpdateForm")
 
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log('am primit', XMLHttpRequest);
-                console.log("Error: " + errorThrown + textStatus);
-            },
-            complete: function () {
-                $('#user-model').modal('hide');
-                window.location.reload();
-            }
-        });
-    });
+    //     if (form[0].checkValidity() === false) {
+    //       event.preventDefault()
+    //       event.stopPropagation()
+    //     }
+    //     $.ajax({
+
+    //         type: method,
+    //         url: urlReq,
+    //         data: $(this).serialize(), // get all form field value in 
+    //         // data:{
+    //         //     nume:nume,
+    //         //     prenume:prenume,
+    //         //     id:idValue
+    //         // },
+    //         dataType: 'json',
+    //         success: function (res) {
+    //             console.log('am primit', res);
+
+    //         },
+    //         error: function (XMLHttpRequest, textStatus, errorThrown) {
+    //             console.log('am primit', XMLHttpRequest);
+    //             console.log("Error: " + errorThrown + textStatus);
+    //         },
+    //         complete: function () {
+    //            // $('#user-model').modal('hide');
+    //            // window.location.reload();
+    //         }
+    //     });
+    // });
 }); 

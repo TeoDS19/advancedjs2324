@@ -8,6 +8,7 @@ export interface BasicUser {
     email:string,
     parola:string,
     telefon: string,
+    poza?:string,
     dataadaugare?:Date,
     
     actiune?:string
